@@ -1,22 +1,25 @@
 from typing import List
 
 class Solution:
-	def maxNumber(self, nums: List[int], k: int) -> int:
-		n = len(nums)
-		nums_copy = list(nums)
-		if n < 2: return 0
-		i = 0
-		num_ops = 0
-		while i < n:
-			if i == (n - 1): break
-			current = nums_copy[i]
-			complement = k - current
-			print(f"current: {current}, i: {i}, n: {n}")
-			if complement in nums_copy[i+1:]:
-				nums_copy.remove(current)
-				nums_copy.remove(complement)
-				n -= 2
-				num_ops += 1
-			else:
-				i += 1
-		return num_ops
+        def maxNumber(self, nums: List[int], k: int) -> int:
+                n = len(nums)
+                if n < 2: return 0
+                nums.sort()
+                left_pointer = 0
+                right_pointer = n - 1
+                num_ops = 0
+                while left_pointer < right_pointer:
+                        sum_pair = nums[left_pointer] + nums[right_pointer]
+                        print(f"left: {left_pointer}, right: {right_pointer}")
+                        print(f"sum: {sum_pair}, nums of ops: {num_ops}")
+                        if sum_pair == k:
+                                num_ops += 1
+                                left_pointer += 1
+                                if left_pointer == right_pointer:
+                                        break
+                                right_pointer -= 1
+                        elif sum_pair < k:
+                                left_pointer += 1
+                        else:
+                                right_pointer -= 1
+                return num_ops
