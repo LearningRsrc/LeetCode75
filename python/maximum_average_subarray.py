@@ -7,7 +7,7 @@ class Solution:
 		averages = []
 		i = 0
 		while len(nums[i:]) >= k:
-			sum_subarray = sum(nums[i:k+1])
+			sum_subarray = sum(nums[i:k+i])
 			avrg = sum_subarray / k
 			averages.append(avrg)
 			i += 1
